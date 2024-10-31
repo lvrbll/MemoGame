@@ -39,10 +39,8 @@ public class MainActivity extends AppCompatActivity {
     private Button button;
     private boolean isGenerated = false;
     private ArrayList finalRandomList;
-    private boolean isChecked1 = false;
-    private boolean isChecked2 = false;
     private TextView activeTv;
-    int activeTvNumber;
+    private int activeTvNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,9 +125,53 @@ public class MainActivity extends AppCompatActivity {
                             activeTv = entry.getKey();
                         }
 
-                    if(!(Objects.equals(tv.get(tV1), true))){
-                        tV1.setText(String.valueOf(finalRandomList.get(0)));
-                        tv.replace(tV1, true);
+                    if(activeTvNumber==1){
+                        if(!(Objects.equals(tv.get(tV1), true))){
+                            tV1.setText(String.valueOf(finalRandomList.get(0)));
+                            if(!(activeTv.getText()==finalRandomList.get(0))){
+                                tV1.setText("");
+                                activeTv.setText("");
+                                tv.replace(tV1, false);
+                                activeTv = null;
+                                activeTvNumber = 0;
+                            }
+                        }
+                    } else if(activeTvNumber==0){
+                        if(!(Objects.equals(tv.get(tV1), true))){
+                            tV1.setText(String.valueOf(finalRandomList.get(0)));
+                            tv.replace(tV1, true);
+                        }
+                    }
+                }
+            }
+        });
+
+        tV2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isGenerated){
+                    for (Map.Entry<TextView, Boolean> entry : tv.entrySet())
+                        if(entry.getValue()){
+                            activeTvNumber++;
+                            activeTv = entry.getKey();
+                        }
+
+                    if(activeTvNumber==1){
+                        if(!(Objects.equals(tv.get(tV2), true))){
+                            tV2.setText(String.valueOf(finalRandomList.get(1)));
+                            if(!(activeTv.getText()==finalRandomList.get(1))){
+                                tV2.setText("");
+                                activeTv.setText("");
+                                tv.replace(tV2, false);
+                                activeTv = null;
+                                activeTvNumber = 0;
+                            }
+                        }
+                    } else if(activeTvNumber==0){
+                        if(!(Objects.equals(tv.get(tV2), true))){
+                            tV2.setText(String.valueOf(finalRandomList.get(1)));
+                            tv.replace(tV2, true);
+                        }
                     }
                 }
             }
