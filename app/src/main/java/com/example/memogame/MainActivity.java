@@ -10,8 +10,13 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList finalRandomList;
     private boolean isChecked1 = false;
     private boolean isChecked2 = false;
+    private TextView activeTv;
+    int activeTvNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,27 +98,39 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        HashMap<TextView, Boolean> tv= new HashMap<TextView, Boolean>();
+        tv.put(tV1, false);
+        tv.put(tV2, false);
+        tv.put(tV3, false);
+        tv.put(tV4, false);
+        tv.put(tV5, false);
+        tv.put(tV6, false);
+        tv.put(tV7, false);
+        tv.put(tV8, false);
+        tv.put(tV9, false);
+        tv.put(tV10, false);
+        tv.put(tV11, false);
+        tv.put(tV12, false);
+        tv.put(tV13, false);
+        tv.put(tV14, false);
+        tv.put(tV15, false);
+        tv.put(tV16, false);
+
+
         tV1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(isGenerated){
-                    if(!isChecked1){
+                    for (Map.Entry<TextView, Boolean> entry : tv.entrySet())
+                        if(entry.getValue()){
+                            activeTvNumber++;
+                            activeTv = entry.getKey();
+                        }
+
+                    if(!(Objects.equals(tv.get(tV1), true))){
                         tV1.setText(String.valueOf(finalRandomList.get(0)));
-                        isChecked1 = true;
-                    } else if(isChecked1 && !isChecked2){
-                        tV1.setText(String.valueOf(finalRandomList.get(0)));
-                        isChecked2 = true;
+                        tv.replace(tV1, true);
                     }
-                }
-            }
-        });
-
-        tV2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(isGenerated){
-                    tV1.setText(String.valueOf(finalRandomList.get(0)));
-
                 }
             }
         });
