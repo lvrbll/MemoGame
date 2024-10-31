@@ -3,9 +3,9 @@ package com.example.memogame;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
     private TextView tV15;
     private TextView tV16;
     private Button button;
+    private boolean isGenerated = false;
+    private ArrayList finalRandomList;
+    private boolean isChecked1 = false;
+    private boolean isChecked2 = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,24 +43,85 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
+
+        tV1 = findViewById(R.id.tV1);
+        tV2 = findViewById(R.id.tV2);
+        tV3 = findViewById(R.id.tV3);
+        tV4 = findViewById(R.id.tV4);
+        tV5 = findViewById(R.id.tV5);
+        tV6 = findViewById(R.id.tV6);
+        tV7 = findViewById(R.id.tV7);
+        tV8 = findViewById(R.id.tV8);
+        tV9 = findViewById(R.id.tV9);
+        tV10 = findViewById(R.id.tV10);
+        tV11 = findViewById(R.id.tV11);
+        tV12 = findViewById(R.id.tV12);
+        tV13 = findViewById(R.id.tV13);
+        tV14 = findViewById(R.id.tV14);
+        tV15 = findViewById(R.id.tV15);
+        tV16 = findViewById(R.id.tV16);
+
         button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                memoElementRandom();
+                if(!isGenerated){
+                    finalRandomList = memoElementRandom();
+                    Log.d("123", String.valueOf(finalRandomList));
+                    memoElementRandom();
+                    tV1.setText("");
+                    tV2.setText("");
+                    tV3.setText("");
+                    tV4.setText("");
+                    tV5.setText("");
+                    tV6.setText("");
+                    tV7.setText("");
+                    tV8.setText("");
+                    tV9.setText("");
+                    tV10.setText("");
+                    tV11.setText("");
+                    tV12.setText("");
+                    tV13.setText("");
+                    tV14.setText("");
+                    tV15.setText("");
+                    tV16.setText("");
+                }else{
+                    Toast.makeText(getApplicationContext(), "Liczby juz wygenerowane", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-    }
 
-    public void memoCheck(){
-        ArrayList randomList = new ArrayList();
-        randomList = memoElementRandom();
+        tV1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isGenerated){
+                    if(!isChecked1){
+                        tV1.setText(String.valueOf(finalRandomList.get(0)));
+                        isChecked1 = true;
+                    } else if(isChecked1 && !isChecked2){
+                        tV1.setText(String.valueOf(finalRandomList.get(0)));
+                        isChecked2 = true;
+                    }
+                }
+            }
+        });
 
+        tV2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isGenerated){
+                    tV1.setText(String.valueOf(finalRandomList.get(0)));
+
+                }
+            }
+        });
     }
 
     public ArrayList<Integer> memoElementRandom(){
         Random random = new Random();
         ArrayList<Integer> valueList = new ArrayList();
+
+
 
         for(int i=0; i<99; i++){
             int x = random.nextInt(8) + 1;
@@ -102,39 +167,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        tV1 = findViewById(R.id.tV1);
-        tV2 = findViewById(R.id.tV2);
-        tV3 = findViewById(R.id.tV3);
-        tV4 = findViewById(R.id.tV4);
-        tV5 = findViewById(R.id.tV5);
-        tV6 = findViewById(R.id.tV6);
-        tV7 = findViewById(R.id.tV7);
-        tV8 = findViewById(R.id.tV8);
-        tV9 = findViewById(R.id.tV9);
-        tV10 = findViewById(R.id.tV10);
-        tV11 = findViewById(R.id.tV11);
-        tV12 = findViewById(R.id.tV12);
-        tV13 = findViewById(R.id.tV13);
-        tV14 = findViewById(R.id.tV14);
-        tV15 = findViewById(R.id.tV15);
-        tV16 = findViewById(R.id.tV16);
-
-        tV1.setText("");
-        tV2.setText("");
-        tV3.setText("");
-        tV4.setText("");
-        tV5.setText("");
-        tV6.setText("");
-        tV7.setText("");
-        tV8.setText("");
-        tV9.setText("");
-        tV10.setText("");
-        tV11.setText("");
-        tV12.setText("");
-        tV13.setText("");
-        tV14.setText("");
-        tV15.setText("");
-        tV16.setText("");
+        isGenerated=true;
 
         return valueList;
     }
