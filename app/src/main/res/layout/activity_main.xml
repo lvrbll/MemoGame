@@ -180,4 +180,12 @@
         android:text="GENERATE"
         android:id="@+id/button"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:backgroundTint="#710C04"
+        android:text="RESET"
+        android:id="@+id/reset"/>
+
 </LinearLayout>

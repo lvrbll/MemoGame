@@ -1,5 +1,6 @@
 package com.example.memogame;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.w3c.dom.Text;
@@ -37,10 +39,12 @@ public class MainActivity extends AppCompatActivity {
     private TextView tV15;
     private TextView tV16;
     private Button button;
+    private Button reset;
     private boolean isGenerated = false;
     private ArrayList finalRandomList;
     private TextView activeTv;
-    private int activeTvNumber;
+    private HashMap<TextView, Boolean> tv;
+    private int count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +100,70 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        HashMap<TextView, Boolean> tv= new HashMap<TextView, Boolean>();
+        reset = findViewById(R.id.reset);
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isGenerated = false;
+                activeTv = null;
+                tV1.setText("?");
+                tV2.setText("?");
+                tV3.setText("?");
+                tV4.setText("?");
+                tV5.setText("?");
+                tV6.setText("?");
+                tV7.setText("?");
+                tV8.setText("?");
+                tV9.setText("?");
+                tV10.setText("?");
+                tV11.setText("?");
+                tV12.setText("?");
+                tV13.setText("?");
+                tV14.setText("?");
+                tV15.setText("?");
+                tV16.setText("?");
+
+                tv.put(tV1, false);
+                tv.put(tV2, false);
+                tv.put(tV3, false);
+                tv.put(tV4, false);
+                tv.put(tV5, false);
+                tv.put(tV6, false);
+                tv.put(tV7, false);
+                tv.put(tV8, false);
+                tv.put(tV9, false);
+                tv.put(tV10, false);
+                tv.put(tV11, false);
+                tv.put(tV12, false);
+                tv.put(tV13, false);
+                tv.put(tV14, false);
+                tv.put(tV15, false);
+                tv.put(tV16, false);
+
+                count = 0;
+            }
+        });
+
+
+
+        tV1.setOnClickListener(v -> handleCardClick(tV1, 0));
+        tV2.setOnClickListener(v -> handleCardClick(tV2, 1));
+        tV3.setOnClickListener(v -> handleCardClick(tV3, 2));
+        tV4.setOnClickListener(v -> handleCardClick(tV4, 3));
+        tV5.setOnClickListener(v -> handleCardClick(tV5, 4));
+        tV6.setOnClickListener(v -> handleCardClick(tV6, 5));
+        tV7.setOnClickListener(v -> handleCardClick(tV7, 6));
+        tV8.setOnClickListener(v -> handleCardClick(tV8, 7));
+        tV9.setOnClickListener(v -> handleCardClick(tV9, 8));
+        tV10.setOnClickListener(v -> handleCardClick(tV10, 9));
+        tV11.setOnClickListener(v -> handleCardClick(tV11, 10));
+        tV12.setOnClickListener(v -> handleCardClick(tV12, 11));
+        tV13.setOnClickListener(v -> handleCardClick(tV13, 12));
+        tV14.setOnClickListener(v -> handleCardClick(tV14, 13));
+        tV15.setOnClickListener(v -> handleCardClick(tV15, 14));
+        tV16.setOnClickListener(v -> handleCardClick(tV16, 15));
+
+        tv= new HashMap<TextView, Boolean>();
         tv.put(tV1, false);
         tv.put(tV2, false);
         tv.put(tV3, false);
@@ -114,150 +181,6 @@ public class MainActivity extends AppCompatActivity {
         tv.put(tV15, false);
         tv.put(tV16, false);
 
-
-        tV1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(isGenerated){
-                    for (Map.Entry<TextView, Boolean> entry : tv.entrySet())
-                        if(entry.getValue()){
-                            activeTvNumber++;
-                            activeTv = entry.getKey();
-                        }
-
-                    if(activeTvNumber==1){
-                        if(!(Objects.equals(tv.get(tV1), true))){
-                            tV1.setText(String.valueOf(finalRandomList.get(0)));
-                            if(!activeTv.getText().equals(String.valueOf(finalRandomList.get(0)))){
-                                tV1.setText("");
-                                activeTv.setText("");
-
-
-                                tv.replace(tV1, false);
-                                tv.replace(activeTv, false);
-
-
-                            }
-                            activeTv = null;
-                            activeTvNumber = 0;
-                        }
-                    } else if(activeTvNumber==0){
-                        if(!(Objects.equals(tv.get(tV1), true))){
-                            tV1.setText(String.valueOf(finalRandomList.get(0)));
-                            tv.replace(tV1, true);
-                        }
-                    }
-                }
-            }
-        });
-
-        tV2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(isGenerated){
-                    for (Map.Entry<TextView, Boolean> entry : tv.entrySet())
-                        if(entry.getValue()){
-                            activeTvNumber++;
-                            activeTv = entry.getKey();
-                        }
-
-                    if(activeTvNumber==1){
-                        if(!(Objects.equals(tv.get(tV2), true))){
-                            tV2.setText(String.valueOf(finalRandomList.get(1)));
-                            if(!activeTv.getText().equals(String.valueOf(finalRandomList.get(1)))){
-                                tV2.setText("");
-                                activeTv.setText("");
-
-
-                                tv.replace(tV2, false);
-                                tv.replace(activeTv, false);
-
-
-                            }
-                            activeTv = null;
-                            activeTvNumber = 0;
-                        }
-                    } else if(activeTvNumber==0){
-                        if(!(Objects.equals(tv.get(tV2), true))){
-                            tV2.setText(String.valueOf(finalRandomList.get(1)));
-                            tv.replace(tV2, true);
-                        }
-                    }
-                }
-            }
-        });
-
-        tV3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(isGenerated){
-                    for (Map.Entry<TextView, Boolean> entry : tv.entrySet())
-                        if(entry.getValue()){
-                            activeTvNumber++;
-                            activeTv = entry.getKey();
-                        }
-
-                    if(activeTvNumber==1){
-                        if(!(Objects.equals(tv.get(tV3), true))){
-                            tV3.setText(String.valueOf(finalRandomList.get(2)));
-                            if(!activeTv.getText().equals(String.valueOf(finalRandomList.get(2)))){
-                                tV3.setText("");
-                                activeTv.setText("");
-
-
-                                tv.replace(tV3, false);
-                                tv.replace(activeTv, false);
-
-
-                            }
-                            activeTv = null;
-                            activeTvNumber = 0;
-                        }
-                    } else if(activeTvNumber==0){
-                        if(!(Objects.equals(tv.get(tV3), true))){
-                            tV3.setText(String.valueOf(finalRandomList.get(2)));
-                            tv.replace(tV3, true);
-                        }
-                    }
-                }
-            }
-        });
-
-        tV4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(isGenerated){
-                    for (Map.Entry<TextView, Boolean> entry : tv.entrySet())
-                        if(entry.getValue()){
-                            activeTvNumber++;
-                            activeTv = entry.getKey();
-                        }
-
-                    if(activeTvNumber==1){
-                        if(!(Objects.equals(tv.get(tV4), true))){
-                            tV4.setText(String.valueOf(finalRandomList.get(3)));
-                            if(!activeTv.getText().equals(String.valueOf(finalRandomList.get(3)))){
-                                tV4.setText("");
-                                activeTv.setText("");
-
-
-                                tv.replace(tV4, false);
-                                tv.replace(activeTv, false);
-
-
-                            }
-                            activeTv = null;
-                            activeTvNumber = 0;
-                        }
-                    } else if(activeTvNumber==0){
-                        if(!(Objects.equals(tv.get(tV4), true))){
-                            tV4.setText(String.valueOf(finalRandomList.get(3)));
-                            tv.replace(tV4, true);
-                        }
-                    }
-                }
-            }
-        });
     }
 
     public ArrayList<Integer> memoElementRandom(){
@@ -315,4 +238,42 @@ public class MainActivity extends AppCompatActivity {
         return valueList;
     }
 
+    public void handleCardClick(final TextView card, int index) {
+
+        if (isGenerated && Boolean.FALSE.equals(tv.get(card))) {
+            card.setText(String.valueOf(finalRandomList.get(index)));
+            tv.put(card, true);
+
+            if (activeTv == null) {
+                activeTv = card;
+            } else {
+                if (!Objects.equals(activeTv.getText().toString(), card.getText().toString())) {
+                    TextView previousCard = activeTv;
+                    card.postDelayed(() -> {
+                        card.setText("");
+                        previousCard.setText("");
+                        tv.put(card, false);
+                        tv.put(previousCard, false);
+                    }, 1000);
+                }
+                count++;
+                activeTv = null;
+            }
+        }
+        isEndGame();
+    }
+
+    public void isEndGame() {
+        boolean gameEnded = true;
+        for (Map.Entry<TextView, Boolean> entry : tv.entrySet()) {
+            if (!entry.getValue()) {
+                gameEnded = false;
+                break;
+            }
+        }
+        if (gameEnded) {
+            Toast.makeText(getApplicationContext(), "Wygrales! Liczba ruchow: " + count, Toast.LENGTH_SHORT).show();
+        }
+
+    }
 }
