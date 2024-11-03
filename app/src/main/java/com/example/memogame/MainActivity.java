@@ -128,13 +128,18 @@ public class MainActivity extends AppCompatActivity {
                     if(activeTvNumber==1){
                         if(!(Objects.equals(tv.get(tV1), true))){
                             tV1.setText(String.valueOf(finalRandomList.get(0)));
-                            if(!(activeTv.getText()==finalRandomList.get(0))){
+                            if(!activeTv.getText().equals(String.valueOf(finalRandomList.get(0)))){
                                 tV1.setText("");
                                 activeTv.setText("");
+
+
                                 tv.replace(tV1, false);
-                                activeTv = null;
-                                activeTvNumber = 0;
+                                tv.replace(activeTv, false);
+
+
                             }
+                            activeTv = null;
+                            activeTvNumber = 0;
                         }
                     } else if(activeTvNumber==0){
                         if(!(Objects.equals(tv.get(tV1), true))){
@@ -159,18 +164,95 @@ public class MainActivity extends AppCompatActivity {
                     if(activeTvNumber==1){
                         if(!(Objects.equals(tv.get(tV2), true))){
                             tV2.setText(String.valueOf(finalRandomList.get(1)));
-                            if(!(activeTv.getText()==finalRandomList.get(1))){
+                            if(!activeTv.getText().equals(String.valueOf(finalRandomList.get(1)))){
                                 tV2.setText("");
                                 activeTv.setText("");
+
+
                                 tv.replace(tV2, false);
-                                activeTv = null;
-                                activeTvNumber = 0;
+                                tv.replace(activeTv, false);
+
+
                             }
+                            activeTv = null;
+                            activeTvNumber = 0;
                         }
                     } else if(activeTvNumber==0){
                         if(!(Objects.equals(tv.get(tV2), true))){
                             tV2.setText(String.valueOf(finalRandomList.get(1)));
                             tv.replace(tV2, true);
+                        }
+                    }
+                }
+            }
+        });
+
+        tV3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isGenerated){
+                    for (Map.Entry<TextView, Boolean> entry : tv.entrySet())
+                        if(entry.getValue()){
+                            activeTvNumber++;
+                            activeTv = entry.getKey();
+                        }
+
+                    if(activeTvNumber==1){
+                        if(!(Objects.equals(tv.get(tV3), true))){
+                            tV3.setText(String.valueOf(finalRandomList.get(2)));
+                            if(!activeTv.getText().equals(String.valueOf(finalRandomList.get(2)))){
+                                tV3.setText("");
+                                activeTv.setText("");
+
+
+                                tv.replace(tV3, false);
+                                tv.replace(activeTv, false);
+
+
+                            }
+                            activeTv = null;
+                            activeTvNumber = 0;
+                        }
+                    } else if(activeTvNumber==0){
+                        if(!(Objects.equals(tv.get(tV3), true))){
+                            tV3.setText(String.valueOf(finalRandomList.get(2)));
+                            tv.replace(tV3, true);
+                        }
+                    }
+                }
+            }
+        });
+
+        tV4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isGenerated){
+                    for (Map.Entry<TextView, Boolean> entry : tv.entrySet())
+                        if(entry.getValue()){
+                            activeTvNumber++;
+                            activeTv = entry.getKey();
+                        }
+
+                    if(activeTvNumber==1){
+                        if(!(Objects.equals(tv.get(tV4), true))){
+                            tV4.setText(String.valueOf(finalRandomList.get(3)));
+                            if(!activeTv.getText().equals(String.valueOf(finalRandomList.get(3)))){
+                                tV4.setText("");
+                                activeTv.setText("");
+
+
+                                tv.replace(tV4, false);
+                                tv.replace(activeTv, false);
+
+
+                            }
+                            activeTv = null;
+                            activeTvNumber = 0;
+                        }
+                    } else if(activeTvNumber==0){
+                        if(!(Objects.equals(tv.get(tV4), true))){
+                            tV4.setText(String.valueOf(finalRandomList.get(3)));
+                            tv.replace(tV4, true);
                         }
                     }
                 }
